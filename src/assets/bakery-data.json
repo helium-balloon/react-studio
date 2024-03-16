@@ -3,7 +3,7 @@
     "name": "Chocolate Chip Cookies",
     "description": "Four classic chocolate chip cookies",
     "price": 7.99,
-    "image": "images/anika.png"
+    "image": "./images/anika.png"
   },
   {
     "name": "Matcha Mille Crepe Cake",
