@@ -16,8 +16,8 @@ function App() {
   const [sum, setSum] = useState(0);
 
   const toCart = (item) => {
-    setSum((prevSum) => prevSum + item.price);
-    setCart((cart) => [...cart, item.name]);
+    setSum((prevSum) => parseFloat(prevSum.toFixed(2)) + parseFloat(item.price.toFixed(2)));
+    setCart((cart) => [...cart, item]);
     
   };
 
@@ -26,11 +26,26 @@ function App() {
       return <p key="empty">Cart is Empty</p>;
     }
 
-    const list = cart.map((name, index) => {
-      return <p key={index}>{name}</p>;
+    const cartItems = cart.reduce((acc, item) => {
+      const existingItem = acc.find((cartItem) => cartItem.name === item.name);
+      if (existingItem) {
+        existingItem.count += 1;
+      } else {
+        acc.push({ ...item, count: 1, name: item.name });
+      }
+      return acc;
+    }, []);
+
+    return cartItems.map((cartItem, index) => {
+      console.log(cartItem.name);
+      return (
+        <p key={index}>
+          {cartItem.count}x {cartItem.name}
+        </p>
+      );
     });
 
-    return list;
+    // return list;
   };
 
   console.log(sum);
