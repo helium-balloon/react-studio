@@ -16,9 +16,11 @@ function App() {
   const [sum, setSum] = useState(0);
 
   const toCart = (item) => {
-    setSum((prevSum) => parseFloat(prevSum.toFixed(2)) + parseFloat(item.price.toFixed(2)));
+    setSum(
+      (prevSum) =>
+        parseFloat(prevSum.toFixed(2)) + parseFloat(item.price.toFixed(2))
+    );
     setCart((cart) => [...cart, item]);
-    
   };
 
   const printCart = () => {
@@ -39,13 +41,13 @@ function App() {
     return cartItems.map((cartItem, index) => {
       console.log(cartItem.name);
       return (
-        <p key={index}>
-          {cartItem.count}x {cartItem.name}
-        </p>
+        <div>
+          <p key={index}>
+            {cartItem.count}x {cartItem.name}
+          </p>
+        </div>
       );
     });
-
-    // return list;
   };
 
   console.log(sum);
@@ -54,29 +56,31 @@ function App() {
   return (
     <div className="App">
       <h1>Megan's Bakery</h1>{" "}
-      <div className="cards">
-        {bakeryData.map(
-          (
-            item,
-            index // TODO: map bakeryData to BakeryItem components
-          ) => (
-            <BakeryItem
-              item={item}
-              name={item.name}
-              description={item.description}
-              image={item.image}
-              price={item.price}
-              toCart={toCart}
-              index={index}
-            ></BakeryItem>
-          )
-        )}
-      </div>
-      <div>
-        <h2>Cart</h2>
-        {printCart()}
-        <p>Sum: {sum}</p>
-        {/* TODO: render a list of items in the cart */}
+      <div className="half">
+        <div className="cards">
+          {bakeryData.map(
+            (
+              item,
+              index // TODO: map bakeryData to BakeryItem components
+            ) => (
+              <BakeryItem
+                item={item}
+                name={item.name}
+                description={item.description}
+                image={item.image}
+                price={item.price}
+                toCart={toCart}
+                index={index}
+              ></BakeryItem>
+            )
+          )}
+        </div>
+        <div className="cart">
+          <h2>Cart</h2>
+          {printCart()}
+          <p>Sum: {sum}</p>
+          {/* TODO: render a list of items in the cart */}
+        </div>
       </div>
     </div>
   );
